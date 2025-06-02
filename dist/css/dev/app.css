@@ -1,4 +1,28 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:regular,500,600,700&display=swap");@import url("https://fonts.googleapis.com/css?family=Inter:regular,500,600,700,900&display=swap");* {
+@import url("https://fonts.googleapis.com/css?family=Poppins:regular,500,600,700&display=swap");@import url("https://fonts.googleapis.com/css?family=Inter:regular,500,600,700,900&display=swap");@font-face {
+  font-family: "iconfont";
+  font-display: swap;
+  src: url("../assets/fonts/iconfont.woff2?5dd31325050005d67d401d3bad891ea8")
+    format("woff2");
+}
+[class*="--icon-"]::before {
+  font-family: iconfont;
+}
+[class*="--icon-twitter"]::before {
+  content: "\f101";
+}
+[class*="--icon-quotes"]::before {
+  content: "\f102";
+}
+[class*="--icon-linkedin"]::before {
+  content: "\f103";
+}
+[class*="--icon-instagram"]::before {
+  content: "\f104";
+}
+[class*="--icon-facebook"]::before {
+  content: "\f105";
+}
+* {
 	padding: 0rem;
 	margin: 0rem;
 	border: 0rem;
@@ -115,6 +139,45 @@ body {
   line-height: normal;
 }
 
+.laible {
+  position: relative;
+  color: #fff;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0 auto;
+  width: fit-content;
+}
+.laible::after {
+  content: "";
+  position: absolute;
+  bottom: -0.375rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 0.125rem;
+  display: block;
+  background-color: #d68240;
+}
+
+.dotts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.9375rem;
+}
+.dotts .swiper-pagination-bullet {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background-color: #192327;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.dotts .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  width: 0.875rem;
+  height: 0.875rem;
+  background-color: #eb9d20;
+}
 @media (max-width: 20em){
   .title {
     font-size: 1.5rem;
@@ -125,8 +188,10 @@ body {
   .title--big {
     font-size: 1.5rem;
   }
+  .laible {
+    margin-bottom: 1rem;
+  }
 }
-
 @media (min-width: 20em) and (max-width: 91.875em){
   .title {
     font-size: clamp( 1.5rem , 1.291304347825rem  +  1.0434782609vw , 2.25rem );
@@ -137,8 +202,10 @@ body {
   .title--big {
     font-size: clamp( 1.5rem , 0.8043478260875rem  +  3.4782608696vw , 4rem );
   }
+  .laible {
+    margin-bottom: clamp( 1rem , 0.86086956521875rem  +  0.6956521739vw , 1.5rem );
+  }
 }
-
 @media (min-width: 91.875em){
   .title {
     font-size: 2.25rem;
@@ -148,5 +215,8 @@ body {
   }
   .title--big {
     font-size: 4rem;
+  }
+  .laible {
+    margin-bottom: 1.5rem;
   }
 }
