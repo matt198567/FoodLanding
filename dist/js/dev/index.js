@@ -4920,8 +4920,8 @@ function Pagination(_ref) {
   });
 }
 function initSliders() {
-  if (document.querySelector(".swiper")) {
-    new Swiper(".swiper", {
+  if (document.querySelector(".testimonials__slider")) {
+    new Swiper(".testimonials__slider", {
       // <- Вказуємо склас потрібного слайдера
       // Підключаємо модулі слайдера
       // для конкретного випадку
@@ -4964,6 +4964,77 @@ function initSliders() {
       },
       // Брейкпоінти
       breakpoints: {
+        640: {
+          slidesPerView: 1.2,
+          spaceBetween: 10,
+          autoHeight: true
+        },
+        650: {
+          slidesPerView: 2,
+          spaceBetween: 20
+        },
+        992: {
+          slidesPerView: 3,
+          spaceBetween: 20
+        }
+        // 1268: {
+        //   slidesPerView: 4,
+        //   spaceBetween: 30,
+        // },
+      },
+      // Події
+      on: {}
+    });
+  }
+  if (document.querySelector(".menu__slider")) {
+    new Swiper(".menu__slider", {
+      // <- Вказуємо склас потрібного слайдера
+      // Підключаємо модулі слайдера
+      // для конкретного випадку
+      modules: [Navigation, Pagination],
+      observer: true,
+      observeParents: true,
+      slidesPerView: 1.2,
+      spaceBetween: 10,
+      autoHeight: true,
+      speed: 800,
+      //touchRatio: 0,
+      //simulateTouch: false,
+      //loop: true,
+      //preloadImages: false,
+      //lazy: true,
+      /*
+      // Ефекти
+      effect: 'fade',
+      autoplay: {
+      	delay: 3000,
+      	disableOnInteraction: false,
+      },
+      */
+      // Пагінація
+      pagination: {
+        el: ".menu__dotts",
+        clickable: true
+      },
+      // Скроллбар
+      /*
+      scrollbar: {
+      	el: '.swiper-scrollbar',
+      	draggable: true,
+      },
+      */
+      // Кнопки "вліво/вправо"
+      navigation: {
+        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next"
+      },
+      // Брейкпоінти
+      breakpoints: {
+        0: {
+          slidesPerView: 1.2,
+          spaceBetween: 10,
+          autoHeight: true
+        },
         640: {
           slidesPerView: 1.2,
           spaceBetween: 10,
@@ -5373,7 +5444,9 @@ document.querySelector("[data-fls-watcher]") ? window.addEventListener("load", (
 class Parallax {
   constructor(elements) {
     if (elements.length) {
-      this.elements = Array.from(elements).map((el) => new Parallax.Each(el, this.options));
+      this.elements = Array.from(elements).map(
+        (el) => new Parallax.Each(el, this.options)
+      );
     }
   }
   destroyEvents() {
@@ -5433,7 +5506,10 @@ Parallax.Each = class {
     this.elements.forEach((el) => {
       const parameters = {
         axis: el.dataset.axis ? el.dataset.axis : "v",
-        direction: el.dataset.flsParallaxDirection ? el.dataset.flsParallaxDirection + "1" : "-1",
+        // direction: el.dataset.flsParallaxDirection
+        //   ? el.dataset.flsParallaxDirection + "1"
+        //   : "-1",
+        direction: el.dataset.flsParallaxDirection === "down" ? 1 : -1,
         coefficient: el.dataset.flsParallaxCoefficient ? Number(el.dataset.flsParallaxCoefficient) : 5,
         additionalProperties: el.dataset.flsParallaxProperties ? el.dataset.flsParallaxProperties : ""
       };
