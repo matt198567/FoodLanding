@@ -548,13 +548,12 @@
   max-width: 48.75rem;
   margin: 0 auto;
 }
-.menu__slider {
-  min-height: 0.0625rem;
-  height: auto;
-}
 .menu__box {
   border-radius: 0.5rem;
   overflow: hidden;
+}
+.menu__image {
+  transition: transform 0.5s ease 0s;
 }
 .menu__inner {
   background-color: #121a1d;
@@ -564,6 +563,7 @@
 .inner-menu__link {
   color: #d68240;
   margin-bottom: 0.3125rem;
+  transition: color 0.5s ease 0s;
 }
 .inner-menu__title {
   font-weight: 600;
@@ -606,18 +606,74 @@
   text-decoration: line-through;
 }
 
+.news__container {
+  max-width: 73.125rem;
+}
+.news__body {
+  position: relative;
+}
+.news__content {
+  position: relative;
+  z-index: 11;
+  max-width: 55rem;
+}
+.news__link {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: normal;
+}
+.news__link::after {
+  content: "";
+  width: 2.625rem;
+  height: 0.125rem;
+  display: block;
+  background-color: #d68240;
+  transition: width 0.3s ease 0s;
+}
+.news__image {
+  filter: brightness(40%);
+}
+
+.form {
+  display: flex;
+  align-items: center;
+}
+.form__inner {
+  width: 43.75rem;
+}
+.form__input {
+  background-color: #182f31;
+  width: 100%;
+  height: 3.75rem;
+  border-radius: 0.5rem;
+  padding: 0.9375rem 1.625rem;
+  color: #fff;
+  border: #645bca;
+}
+.form__input::placeholder {
+  color: #b2bbbb;
+}
+.form__input:focus {
+  border: 0.0625rem solid #645bca;
+}
+.form__input:focus::placeholder {
+  color: #fff;
+}
+.form__button {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 @media (max-width: 66.5625em) and (min-width: 91.875em) {
   .order__content {
     margin-bottom: 6.25rem;
   }
 }
-
 @media (max-width: 66.5625em) and (max-width: 20em) {
   .order__content {
     margin-bottom: 3.75rem;
   }
 }
-
 @media (max-width: 66.5625em) {
   .order {
     background-image: url("../assets/img/order/image.01.webp");
@@ -633,13 +689,11 @@
     display: none;
   }
 }
-
 @media (max-width: 47.99875em) and (any-hover: none) {
   .icon-menu {
     cursor: default;
   }
 }
-
 @media (max-width: 47.99875em) {
   .menu {
     flex-grow: 1;
@@ -734,7 +788,6 @@
     margin: 0 auto;
   }
 }
-
 @media (max-width: 40rem) {
   .swiper {
     margin-right: -0.9375rem;
@@ -746,8 +799,11 @@
     margin-right: -0.9375rem;
     padding-right: 0.9375rem;
   }
+  .menu__slider {
+    margin-left: 0;
+    padding-left: 0;
+  }
 }
-
 @media (max-width: 36.25em) {
   .inner-order__link-top {
     transform: translateY(-1.25rem);
@@ -756,7 +812,17 @@
     transform: translateY(1.25rem);
   }
 }
-
+@media (max-width: 26.25em) {
+  .form {
+    flex-direction: column;
+  }
+  .form__inner {
+    width: 100%;
+  }
+  .form__button-wrap {
+    width: 100%;
+  }
+}
 @media (max-width: 21.875em) {
   .header__inner {
     flex: 0 0 5rem;
@@ -764,7 +830,6 @@
     overflow: hidden;
   }
 }
-
 @media (max-width: 20em) {
   .menu__list {
     gap: 1.25rem;
@@ -925,14 +990,33 @@
   .inner-menu__price {
     margin-bottom: 0.625rem;
   }
+  .news__container {
+    padding-top: 2.5rem;
+  }
+  .news__container {
+    padding-bottom: 2.5rem;
+  }
+  .news__body {
+    padding-top: 2.5rem;
+  }
+  .news__body {
+    padding-bottom: 2.5rem;
+  }
+  .news__link {
+    margin-bottom: 0.625rem;
+  }
+  .news__text {
+    margin-bottom: 1.125rem;
+  }
+  .form {
+    gap: 0.5rem;
+  }
 }
-
 @media (max-width: 66.5625em) and (min-width: 20em) and (max-width: 91.875em) {
   .order__content {
     margin-bottom: clamp( 3.75rem , 3.0543478260875rem  +  3.4782608696vw , 6.25rem );
   }
 }
-
 @media (min-width: 20em) and (max-width: 91.875em) {
   .menu__list {
     gap: clamp( 1.25rem , 0.7282608695625rem  +  2.6086956522vw , 3.125rem );
@@ -1093,38 +1177,53 @@
   .inner-menu__price {
     margin-bottom: clamp( 0.625rem , 0.5206521739125rem  +  0.5217391304vw , 1rem );
   }
+  .news__container {
+    padding-top: clamp( 2.5rem , 2.15217391304375rem  +  1.7391304348vw , 3.75rem );
+  }
+  .news__container {
+    padding-bottom: clamp( 2.5rem , 2.15217391304375rem  +  1.7391304348vw , 3.75rem );
+  }
+  .news__body {
+    padding-top: clamp( 2.5rem , 1.75217391304375rem  +  3.7391304348vw , 5.1875rem );
+  }
+  .news__body {
+    padding-bottom: clamp( 2.5rem , 1.75217391304375rem  +  3.7391304348vw , 5.1875rem );
+  }
+  .news__link {
+    margin-bottom: clamp( 0.625rem , 0.45108695651875rem  +  0.8695652174vw , 1.25rem );
+  }
+  .news__text {
+    margin-bottom: clamp( 1.125rem , 1.0206521739125rem  +  0.5217391304vw , 1.5rem );
+  }
+  .form {
+    gap: clamp( 0.5rem , 0.36086956521875rem  +  0.6956521739vw , 1rem );
+  }
 }
-
 @media (min-width: 29.99875em) {
   .achievements-testimonials__list {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 @media (min-width: 47.99875em) {
   .header__body {
     justify-content: space-between;
   }
 }
-
 @media (min-width: 61.99875em) and (min-width: 91.875em) {
   .about__body:nth-of-type(2) .about__content {
     margin-left: 6.25rem;
   }
 }
-
 @media (min-width: 61.99875em) and (min-width: 20em) and (max-width: 91.875em) {
   .about__body:nth-of-type(2) .about__content {
     margin-left: clamp( 3.125rem , 2.25543478260625rem  +  4.347826087vw , 6.25rem );
   }
 }
-
 @media (min-width: 61.99875em) and (max-width: 20em) {
   .about__body:nth-of-type(2) .about__content {
     margin-left: 3.125rem;
   }
 }
-
 @media (min-width: 61.99875em) {
   .menu__link {
     padding: 0.3125rem 0.625rem;
@@ -1147,7 +1246,6 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
-
 @media (min-width: 66.5625em) {
   .order__body {
     position: relative;
@@ -1171,7 +1269,6 @@
     display: block;
   }
 }
-
 @media (min-width: 91.875em) {
   .menu__list {
     gap: 3.125rem;
@@ -1332,8 +1429,28 @@
   .inner-menu__price {
     margin-bottom: 1rem;
   }
+  .news__container {
+    padding-top: 3.75rem;
+  }
+  .news__container {
+    padding-bottom: 3.75rem;
+  }
+  .news__body {
+    padding-top: 5.1875rem;
+  }
+  .news__body {
+    padding-bottom: 5.1875rem;
+  }
+  .news__link {
+    margin-bottom: 1.25rem;
+  }
+  .news__text {
+    margin-bottom: 1.5rem;
+  }
+  .form {
+    gap: 1rem;
+  }
 }
-
 @media (any-hover: hover) {
   .menu__link:hover::after {
     width: 100%;
@@ -1370,5 +1487,14 @@
   }
   .inner-order__image:hover {
     transform: scale(1.03);
+  }
+  .menu__image:hover {
+    transform: scale(1.05);
+  }
+  .inner-menu__link:hover {
+    color: #e4cb58;
+  }
+  .news__link:hover::after {
+    width: 100%;
   }
 }
