@@ -5395,59 +5395,76 @@ function digitsCounter() {
 document.querySelector("[data-fls-digcounter]") ? window.addEventListener("load", digitsCounter) : null;
 function formRating() {
   const ratings = document.querySelectorAll("[data-fls-rating]");
-  if (ratings) {
+  if (ratings.length) {
     ratings.forEach((rating) => {
       const ratingValue = +rating.dataset.flsRatingValue;
-      const ratingSize = +rating.dataset.flsRatingSize ? +rating.dataset.flsRatingSize : 5;
+      const ratingSize = +rating.dataset.flsRatingSize || 5;
       formRatingInit(rating, ratingSize);
-      ratingValue ? formRatingSet(rating, ratingValue) : null;
-      document.addEventListener("click", formRatingAction);
+      if (ratingValue) formRatingSet(rating, ratingValue);
+      if (rating.dataset.flsRating === "set") {
+        rating.addEventListener("click", formRatingAction);
+        rating.addEventListener("mouseover", formRatingHover);
+        rating.addEventListener(
+          "mouseout",
+          () => formRatingSet(rating, rating.dataset.flsRatingValue || 0)
+        );
+      }
     });
-  }
-  function formRatingAction(e) {
-    const targetElement = e.target;
-    if (targetElement.closest(".rating__input")) {
-      const currentElement = targetElement.closest(".rating__input");
-      const ratingValue = +currentElement.value;
-      const rating = currentElement.closest(".rating");
-      const ratingSet = rating.dataset.flsRating === "set";
-      ratingSet ? formRatingGet(rating, ratingValue) : null;
-    }
   }
   function formRatingInit(rating, ratingSize) {
-    let ratingItems = ``;
-    for (let index = 0; index < ratingSize; index++) {
-      index === 0 ? ratingItems += `<div class="rating__items">` : null;
+    let ratingItems = `<div class="rating__items">`;
+    for (let i = 0; i < ratingSize; i++) {
       ratingItems += `
 				<label class="rating__item">
-					<input class="rating__input" type="radio" name="rating" value="${index + 1}">
+					<input class="rating__input" type="radio" name="rating" value="${i + 1}">
 				</label>`;
-      index === ratingSize ? ratingItems += `</div">` : null;
     }
+    ratingItems += `</div>`;
     rating.insertAdjacentHTML("beforeend", ratingItems);
   }
-  function formRatingGet(rating, ratingValue) {
-    const resultRating = ratingValue;
-    formRatingSet(rating, resultRating);
+  function formRatingAction(e) {
+    const input = e.target.closest(".rating__input");
+    if (input) {
+      const rating = input.closest(".rating");
+      const ratingValue = +input.value;
+      rating.dataset.flsRatingValue = ratingValue;
+      formRatingSet(rating, ratingValue);
+    }
+  }
+  function formRatingHover(e) {
+    const input = e.target.closest(".rating__input");
+    if (input) {
+      const rating = input.closest(".rating");
+      const hoverValue = +input.value;
+      formRatingSet(rating, hoverValue);
+    }
   }
   function formRatingSet(rating, value) {
-    const ratingItems = rating.querySelectorAll(".rating__item");
-    const resultFullItems = parseInt(value);
-    const resultPartItem = value - resultFullItems;
-    rating.hasAttribute("data-rating-title") ? rating.title = value : null;
-    ratingItems.forEach((ratingItem, index) => {
-      ratingItem.classList.remove("rating__item--active");
-      ratingItem.querySelector("span") ? ratingItems[index].querySelector("span").remove() : null;
-      if (index <= resultFullItems - 1) {
-        ratingItem.classList.add("rating__item--active");
+    const items = rating.querySelectorAll(".rating__item");
+    const full = Math.floor(value);
+    const part = value - full;
+    items.forEach((item, i) => {
+      item.classList.remove("rating__item--active");
+      const span = item.querySelector("span");
+      if (span) span.remove();
+      if (i < full) {
+        item.classList.add("rating__item--active");
       }
-      if (index === resultFullItems && resultPartItem) {
-        ratingItem.insertAdjacentHTML("beforeend", `<span style="width:${resultPartItem * 100}%"></span>`);
+      if (i === full && part) {
+        item.insertAdjacentHTML(
+          "beforeend",
+          `<span style="width:${part * 100}%"></span>`
+        );
       }
     });
+    if (rating.hasAttribute("data-rating-title")) {
+      rating.title = value;
+    }
   }
 }
-document.querySelector("[data-fls-rating]") ? window.addEventListener("load", formRating) : null;
+if (document.querySelector("[data-fls-rating]")) {
+  window.addEventListener("load", formRating);
+}
 class ScrollWatcher {
   constructor(props) {
     let defaultConfig = {
